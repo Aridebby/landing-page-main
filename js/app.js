@@ -77,12 +77,49 @@ const nav = document.getElementById('navbar');
         li.classList.remove('tabSelected');
 
     })
-    li.classList.add('tabSelected')
+   
+});
+  });
+  // Get all section elements
+const sections = document.querySelectorAll('section');
+
+// Add event listener to the window object for scrolling
+window.addEventListener('scroll', () => {
+  // Loop through all section elements
+  sections.forEach(section => {
+    const sectionTop = section.getBoundingClientRect().top; // Get the top position of the section
+    const sectionHeight = section.clientHeight; // Get the height of the section
+    if (sectionTop <= window.innerHeight / 2 && sectionTop > -sectionHeight / 2) {
+      // Add 'your-active-class' class to the corresponding section
+      section.classList.add('your-active-class');
+    } else {
+      // Remove 'your-active-class' class from sections not in view
+      section.classList.remove('your-active-class');
+    }
+  });
 });
 
-   // Remove the 'selected' class from all sections
-  
-  });
+     // Remove the 'selected' class from all sections
+     window.addEventListener('scroll', () => {
+       
+        const sections = document.querySelectorAll('section');
+       const navItems = nav.querySelectorAll('a');
+        // Loop through all section elements
+        sections.forEach(section => {
+          const sectionTop = section.getBoundingClientRect().top; // Get the top position of the section
+          const sectionHeight = section.clientHeight; // Get the height of the section
+          if (sectionTop <= window.innerHeight / 2 && sectionTop > -sectionHeight / 2) {
+            // Add 'section-active' class to the corresponding navigation link
+            const targetId = '#' + section.getAttribute('id'); // Get the ID of the section
+            navItems.forEach(link => {
+              link.classList.remove('tabSelected'); // Remove 'section-active' class from all navigation links
+              if (link.getAttribute('href') === targetId) {
+                link.classList.add('tabSelected'); // Add 'section-active' class to the corresponding navigation link
+              }
+            });
+          }
+        });
+      });
 
 // Add class 'active' to section when near top of viewport
 
@@ -102,9 +139,3 @@ const nav = document.getElementById('navbar');
 
 // Set sections as active
 // Define the navigation items
-
-  
- 
-  
-
-
